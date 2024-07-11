@@ -6,4 +6,4 @@ const Brand = model('Brand', new Schema({
     status: booleanTrue,
 }, extraConfig))
 
-module.exports = Brand
+module.exports = Brand;
