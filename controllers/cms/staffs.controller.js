@@ -6,10 +6,9 @@ class StaffsCtrl {
     index = async (req, res, next) => {
         try{
             const staffs = await User.find({ role: 'Staff' });
-
             res.send(staffs);
         } catch(error){
-            errorMsg(next, error)
+            errorMsg(next, error);
         }
     }
 
@@ -26,7 +25,7 @@ class StaffsCtrl {
                     message: 'Staff added'
                 })
             } else {
-                    validationError(next, {Password: 'The password is not confirmed'})
+                    validationError(next, {Password: 'The password is not confirmed'});
             }
         } catch (error){
             errorMsg(next, error)
