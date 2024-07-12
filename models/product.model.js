@@ -11,6 +11,7 @@ const Product = model('Product', new Schema({
     categoryId: { ...foreignConfig, ref: 'Category' }, //Mongo le aafai custom id banako hunxa tesaile yesai tanna mildaina so yesari taninxa 
     brandId: { ...foreignConfig, ref: 'Brand' },
     status: booleanTrue,
+    featured: { type: Boolean, default: false }
 }, extraConfig))
 
 module.exports = Product
