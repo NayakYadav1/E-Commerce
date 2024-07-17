@@ -119,6 +119,31 @@ class ProductsCtrl {
             errorMsg(next, error);
         }
     }
+
+    image = async(req, res, next) => {
+        try{
+            const { id, filename } = req.params;
+            const product = await Product.findById(id);
+            if(product){
+                unlinkSync(`uploads/${filename}`);
+
+                const images = product.images.filter(file => filename != file)
+
+                await Product.findByIdAndUpdate(id, { images });
+
+                res.send({
+                    message: 'Product Image Deleted'
+                });
+            } else {
+                next ({
+                    message: 'Product Not Found',
+                    status: 404
+                })
+            }
+        } catch(error){
+            errorMsg(next, error);
+        }
+    }
 }
 
 module.exports = new ProductsCtrl;
