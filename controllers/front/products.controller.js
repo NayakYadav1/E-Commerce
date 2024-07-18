@@ -5,7 +5,8 @@ const { Types } = require('mongoose');
 class ProductsCtrl {
     latest = async (req, res, next) => {
         try{
-            const products = await Product.find({ status: true }).sort({ createdAt: 'desc' })
+            const products = await Product.find({ status: true })
+            .sort({ createdAt: 'desc' })
 
             res.send(products);
         } catch(error) {
