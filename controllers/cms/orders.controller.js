@@ -17,7 +17,7 @@ class OrdersCtrl {
                     let details = await Detail.aggregate()
                         .match({ orderId: orders[i]._id })
                         .lookup({
-                            from: 'Products',
+                            from: 'products',
                             localField: 'productId',
                             foreignField: '_id',
                             as: 'product'
