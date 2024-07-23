@@ -67,10 +67,13 @@ class ProfileCtrl {
 
     orders = async (req, res, next) => {
         try{
-            let order = await Order.aggregate()
-                .match({ orderId: order[i]._id })
+            let orders = await Order.find({ userId: req.user._id });
+
+            for(let i in orders) {
+                let details = await Detail.aggregate()
+                .match({ orderId: orders[i]._id })
                 .lookup({
-                    form: 'products',
+                    from: 'products',
                     localField: 'productId',
                     foreignField: '_id',
                     as: 'product'
@@ -84,6 +87,7 @@ class ProfileCtrl {
                     ...orders[i].toJSON(),
                     details
                 }
+            }
 
                 res.send(orders);
         } catch (error) {
